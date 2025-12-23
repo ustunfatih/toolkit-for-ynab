@@ -9,7 +9,7 @@ import path from 'path';
 import { WORKSPACE_ROOT } from '../lib/paths';
 
 const SOURCE_DIR = path.join(WORKSPACE_ROOT, 'dist', 'extension');
-const TARGET_DIR = path.join(WORKSPACE_ROOT, 'safari', 'Extension', 'Resources');
+const TARGET_DIR = path.join(WORKSPACE_ROOT, 'safari', 'Extension', '_Resources');
 
 function copyRecursive(src: string, dest: string): void {
   const stat = fs.statSync(src);
