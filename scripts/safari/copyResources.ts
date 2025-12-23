@@ -38,8 +38,8 @@ function removeRecursive(target: string): void {
   if (stat.isDirectory()) {
     // Use fs.rmSync with recursive option (Node.js 14.14.0+)
     // Falls back to manual deletion for older Node versions
-    if (fs.rmSync) {
-      fs.rmSync(target, { recursive: true, force: true });
+    if (typeof (fs as any).rmSync === 'function') {
+      (fs as any).rmSync(target, { recursive: true, force: true });
     } else {
       const entries = fs.readdirSync(target);
       for (const entry of entries) {
