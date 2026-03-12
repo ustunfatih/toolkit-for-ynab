@@ -67,9 +67,16 @@ export class ScrollableEditMenu extends Feature {
   }
 
   addScrollWrappers(modalContainer) {
-    const view = Ember.ViewUtils.getElementView(
-      document.querySelector('.modal-account-register-action-bar'),
-    );
+    const element = document.querySelector('.modal-account-register-action-bar');
+    if (!element || !Ember?.ViewUtils?.getElementView) {
+      return;
+    }
+
+    const view = Ember.ViewUtils.getElementView(element);
+    if (!view) {
+      return;
+    }
+
     view.isScrolledIfOverflowedOutOfWindow = true;
     view.makeScrollableIfOverflowed = this.overrideMSIO;
     $('.modal-list', modalContainer).addClass('js-ynab-modal-scrollable-area');
