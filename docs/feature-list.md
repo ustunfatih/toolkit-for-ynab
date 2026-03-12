@@ -214,6 +214,9 @@ Automatically mark transaction as cleared when you enter it manually.
 ## Bottom Notification Bar
 Move the notification bar to the bottom as an overlay preventing transactions from "jumping around."
 
+## Bulk Edit Dates
+Add an option to the "Edit Transaction(s)" menu to "Edit Date(s)" for all selected transactions.
+
 ## Bulk Edit Memos
 Add an option to the "Edit Transaction(s)" menu to "Edit Memo(s)" for all selected transactions. Allows adding a prefix or a suffix to selected memos.
 
