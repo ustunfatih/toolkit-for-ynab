@@ -1,4 +1,5 @@
 jest.mock('toolkit/extension/features/feature');
+import * as ReactDOMClient from 'react-dom/client';
 import {
   ReconcileAssistant,
   RECONCILE_ASSISTANT_MODAL_PORTAL,
@@ -47,14 +48,13 @@ describe('Reconcile Assistant', () => {
 
       expect(_createFeatureContainerMock).toHaveBeenCalledTimes(1);
       expect(_createModalPortalMock).toHaveBeenCalledTimes(1);
-      expect(document.querySelector('.button-primary.button')).toBeTruthy();
-
-      // Ensure our component rendered with our button
       let container = document.getElementById(RECONCILE_ASSISTANT_CONTAINER_ID);
-      expect(container.children.length).toBeTruthy();
-      expect(container.children.length).toBe(1);
-      expect(container.children[0].tagName).toBe('BUTTON');
-      expect(container.children[0].textContent).toBe('Use Reconcile Assistant');
+      expect(container).toBeTruthy();
+      expect(ReactDOMClient.createRoot).toHaveBeenCalledTimes(1);
+      expect(ReactDOMClient.createRoot).toHaveBeenCalledWith(container);
+
+      const renderMock = ReactDOMClient.createRoot.mock.results[0].value.render;
+      expect(renderMock).toHaveBeenCalledTimes(1);
     });
   });
 

@@ -1,7 +1,9 @@
 import type { YNABRouter } from 'toolkit/types/ynab/controllers/YNABRouter';
+import type { Ember as YNABEmber } from 'toolkit/types/ynab/ember';
 import type { EmberView, EmberViewRegistry } from 'toolkit/types/ynab/ember/ember-view';
 
 export const __ynabapp__ = YNAB.NAMESPACES[0];
+export const Ember = (window as Window & { Ember?: YNABEmber }).Ember;
 
 const viewCache = new Map();
 

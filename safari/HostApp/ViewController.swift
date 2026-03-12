@@ -4,12 +4,20 @@ import SafariServices
 class ViewController: NSViewController {
     @IBOutlet weak var appNameLabel: NSTextField!
 
+    private var extensionBundleIdentifier: String {
+        guard let hostBundleIdentifier = Bundle.main.bundleIdentifier else {
+            return "com.toolkitforynab.Toolkit-for-YNAB.Extension"
+        }
+
+        return "\(hostBundleIdentifier).Extension"
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         appNameLabel.stringValue = "Toolkit for YNAB"
 
         // Check extension state
-        SFSafariExtensionManager.getStateOfSafariExtension(withIdentifier: "com.toolkitforynab.Toolkit-for-YNAB.Extension") { (state, error) in
+        SFSafariExtensionManager.getStateOfSafariExtension(withIdentifier: extensionBundleIdentifier) { (state, error) in
             DispatchQueue.main.async {
                 if let error = error {
                     self.appNameLabel.stringValue = "Error checking extension state: \(error.localizedDescription)"
@@ -34,7 +42,7 @@ class ViewController: NSViewController {
     @IBAction func openSafariExtensionPreferences(_ sender: AnyObject?) {
         print("Button clicked - opening Safari preferences...")
 
-        SFSafariApplication.showPreferencesForExtension(withIdentifier: "com.toolkitforynab.Toolkit-for-YNAB.Extension") { error in
+        SFSafariApplication.showPreferencesForExtension(withIdentifier: extensionBundleIdentifier) { error in
             DispatchQueue.main.async {
                 if let error = error {
                     print("Error opening Safari preferences: \(error)")
