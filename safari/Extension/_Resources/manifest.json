@@ -1,21 +1,31 @@
 {
   "manifest_version": 2,
-  "author": "Toolkit for YNAB",
-  "name": "Toolkit for YNAB",
+  "author": "Fatih Ustun",
+  "name": "OpenBudget for YNAB",
   "description": "UI customizations and tweaks for the web version of YNAB.",
-  "version": "3.19.0",
+  "version": "3.20.0",
   "content_scripts": [
     {
-      "matches": ["https://*.youneedabudget.com/*", "https://*.ynab.com/*"],
+      "matches": [
+        "https://app.youneedabudget.com/*",
+        "https://app.ynab.com/*"
+      ],
       "all_frames": true,
       "run_at": "document_idle",
-      "js": ["content-scripts/extension-bridge.js"]
+      "js": [
+        "content-scripts/extension-bridge.js"
+      ]
     },
     {
-      "matches": ["https://*.youneedabudget.com/*", "https://*.ynab.com/*"],
+      "matches": [
+        "https://app.youneedabudget.com/*",
+        "https://app.ynab.com/*"
+      ],
       "all_frames": true,
       "run_at": "document_start",
-      "js": ["content-scripts/enable-ember-debug.js"]
+      "js": [
+        "content-scripts/enable-ember-debug.js"
+      ]
     }
   ],
   "icons": {
@@ -29,21 +39,30 @@
     "512": "assets/images/icons/icon512.png",
     "1024": "assets/images/icons/icon1024.png"
   },
-  "web_accessible_resources": ["assets/*", "web-accessibles/*"],
+  "web_accessible_resources": [
+    "assets/*",
+    "web-accessibles/*"
+  ],
   "background": {
-    "scripts": ["background/background.js"],
+    "scripts": [
+      "background/background.js"
+    ],
     "persistent": false
   },
-  "homepage_url": "https://github.com/toolkit-for-ynab/toolkit-for-ynab/",
+  "homepage_url": "https://github.com/fatihustun/toolkit-for-ynab",
   "options_ui": {
     "open_in_tab": true,
     "page": "options/index.html"
   },
-  "permissions": ["https://*.youneedabudget.com/*", "https://*.ynab.com/*", "storage"],
+  "permissions": [
+    "https://app.youneedabudget.com/*",
+    "https://app.ynab.com/*",
+    "storage"
+  ],
   "content_security_policy": "script-src 'self'; object-src 'self'",
   "browser_action": {
     "default_icon": "assets/images/icons/button.png",
-    "default_title": "Toolkit for YNAB",
+    "default_title": "OpenBudget for YNAB",
     "default_popup": "popup/index.html"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "toolkit-for-ynab",
+  "name": "openbudget-for-ynab",
   "version": "3.20.0",
   "private": true,
   "scripts": {
@@ -11,7 +11,7 @@
     "build:production": "yarn build:check && yarn webpack:production && yarn compress:chrome && yarn manifest:firefox && yarn compress:firefox",
     "build:ios": "yarn build:check && yarn webpack:production && yarn manifest:ios",
     "build:safari": "yarn build:check && yarn webpack:production && yarn manifest:safari",
-    "build:ci": "yarn gen && yarn sentry:create && yarn build:production && yarn sentry:upload --rewrite",
+    "build:ci": "yarn gen && yarn build:production",
     "build:ci-test": "yarn gen && yarn build:production",
     "compress:firefox": "ts-node scripts/compressSrc.ts --browser=firefox && ts-node scripts/compressDist.ts --browser=firefox",
     "compress:chrome": "ts-node scripts/compressSrc.ts --browser=chrome && ts-node scripts/compressDist.ts --browser=chrome",
@@ -43,8 +43,6 @@
     "gen:docs": "yarn gen:settings && ts-node scripts/generateDocs.ts",
     "l10n:update": "node scripts/updateLocalizationStrings.js",
     "l10n:pull": "scripts/get_l10ns",
-    "sentry:create": "sentry-cli releases -o toolkit-for-ynab -p toolkit-for-ynab new $npm_package_version",
-    "sentry:upload": "sentry-cli releases -o toolkit-for-ynab -p toolkit-for-ynab files $$npm_package_version upload-sourcemaps ./dist/extension/",
     "type-check": "tsc --skipLibCheck"
   },
   "jest": {
@@ -111,7 +109,6 @@
     "highcharts": "^9.1.1",
     "jquery": "^3.6.1",
     "moment": "^2.30.1",
-    "raven-js": "^3.25.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-markdown": "^9.0.1",

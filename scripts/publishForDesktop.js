@@ -7,7 +7,7 @@ const workspaceRoot = path.join(__dirname, '..');
 const desktopUpdatesPath = path.join(
   workspaceRoot,
   '..',
-  'toolkit-for-ynab-gh-pages',
+  'openbudget-for-ynab-gh-pages',
   'desktop-updates',
 );
 
@@ -16,13 +16,13 @@ rimraf.sync(desktopUpdatesPath);
 fs.mkdirSync(desktopUpdatesPath);
 
 // Copy the extension over first.
-const filesToCopy = glob.sync(path.join(workspaceRoot, 'dist/toolkit-for-ynab-v*.zip'));
+const filesToCopy = glob.sync(path.join(workspaceRoot, 'dist/openbudget-for-ynab-v*.zip'));
 
 if (filesToCopy.length !== 1) {
   throw new Error(`There must be precisely one zip file to copy. Found ${filesToCopy.length}!`);
 }
 
-fs.copyFileSync(filesToCopy[0], path.join(desktopUpdatesPath, 'toolkitforynab_desktop.zip'));
+fs.copyFileSync(filesToCopy[0], path.join(desktopUpdatesPath, 'openbudgetforynab_desktop.zip'));
 
 // And now we can copy over the manifest too.
 fs.copyFileSync(

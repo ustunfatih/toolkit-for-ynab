@@ -9,6 +9,7 @@ import { logToolkitError, withToolkitError } from 'toolkit/core/common/errors/wi
 import { compareSemanticVersion } from './utils/helpers';
 import { componentAppend } from './utils/react';
 import { ToolkitReleaseModal } from 'toolkit/core/components/toolkit-release-modal';
+import { getCurrentOrigin } from 'toolkit/core/common/app-config';
 import { Feature } from './features/feature';
 import { InboundMessage, InboundMessageType, OutboundMessageType } from 'toolkit/core/messages';
 import { ObserveListener, RouteChangeListener } from './listeners';
@@ -31,7 +32,7 @@ export class YNABToolkit {
 
   public initializeToolkit() {
     window.addEventListener('message', this.onBackgroundMessage);
-    window.postMessage({ type: OutboundMessageType.ToolkitLoaded }, '*');
+    window.postMessage({ type: OutboundMessageType.ToolkitLoaded }, getCurrentOrigin());
   }
 
   private applyFeatureCSS() {
@@ -131,7 +132,7 @@ export class YNABToolkit {
   };
 
   private onBackgroundMessage = (event: InboundMessage) => {
-    if (event.source !== window) {
+    if (event.source !== window || event.origin !== window.location.origin) {
       return;
     }
 

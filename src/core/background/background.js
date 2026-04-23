@@ -1,7 +1,5 @@
-import Raven from 'raven-js';
 import { getBrowser, getBrowserName, isSafariBrowser } from 'toolkit/core/common/web-extensions';
 import { ToolkitStorage } from 'toolkit/core/common/storage';
-import { getEnvironment } from 'toolkit/core/common/web-extensions';
 import { Browser } from 'toolkit/core/common/constants';
 
 const ONE_HOUR_MS = 1000 * 60 * 60;
@@ -14,7 +12,6 @@ export class Background {
   _storage = new ToolkitStorage();
 
   constructor() {
-    this._initializeSentry();
     this._storage.getFeatureSetting(TOOLKIT_DISABLED_FEATURE_SETTING).then(this._updatePopupIcon);
   }
 
@@ -73,16 +70,12 @@ export class Background {
   };
 
   _handleException = (context) => {
-    Raven.captureException(new Error(context.serializedError), {
-      tags: {
-        featureName: context.featureName,
-      },
-      extra: {
-        featureSetting: context.featureSetting,
-        functionName: context.functionName,
-        routeName: context.routeName,
-      },
-    });
+    console.groupCollapsed(`[OpenBudget] ${context.featureName || 'unknown'} error`);
+    console.error(context.serializedError);
+    console.info('Feature setting:', context.featureSetting);
+    console.info('Function:', context.functionName);
+    console.info('Route:', context.routeName);
+    console.groupEnd();
   };
 
   _handleStorageMessage = (request, callback) => {
@@ -102,23 +95,6 @@ export class Background {
         console.log('unknown storage request', request);
     }
   };
-
-  _handleUpdateAvailable = () => {
-    this._browser.runtime.reload();
-  };
-
-  _initializeSentry() {
-    const environment = getEnvironment();
-    const context = {
-      environment,
-      release: this._browser.runtime.getManifest().version,
-    };
-
-    if (environment !== 'development') {
-      Raven.config('https://119c2693bc2a4ed18052ef40ce4adc3c@sentry.io/1218490', context).install();
-      Raven.setExtraContext(context);
-    }
-  }
 
   _updatePopupIcon = (isToolkitDisabled) => {
     const imagePath = `assets/images/icons/button${isToolkitDisabled ? '-disabled' : ''}.png`;

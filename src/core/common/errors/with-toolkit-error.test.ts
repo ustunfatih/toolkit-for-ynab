@@ -106,7 +106,7 @@ describe('toolkit error utils', () => {
           },
           type: 'ynab-toolkit-error',
         },
-        '*',
+        'https://app.ynab.com',
       );
     });
   });

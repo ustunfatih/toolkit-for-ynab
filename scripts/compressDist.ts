@@ -13,7 +13,7 @@ async function main() {
   assertExtensionDirectoryExists();
 
   const { browser } = await withRequiredBrowserChoice(yargs).parse();
-  const zipFileName = buildZipFilePath('toolkit-for-ynab', browser);
+  const zipFileName = buildZipFilePath('openbudget-for-ynab', browser);
   const output = createZipArchiveWriteStream(zipFileName);
   const archiver = createDefaultArchiver(output);
 

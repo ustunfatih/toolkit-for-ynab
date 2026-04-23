@@ -43,6 +43,11 @@ const setup = (setupOptions = {}) => {
       },
       environment: 'test' as YNABToolkitObject['environment'],
       extensionId: 'extensionId',
+      links: {
+        privacy: 'privacyURL',
+        releases: 'releasesURL',
+        support: 'supportURL',
+      },
       name: 'extension',
       version: 'extensionVersion',
       options: {} as any,
@@ -56,6 +61,7 @@ const setup = (setupOptions = {}) => {
   if (options.sendBootstrap) {
     callMessageListener({
       source: window,
+      origin: window.location.origin,
       data: bootstrapData,
     });
   }
@@ -88,7 +94,10 @@ describe('YNABToolkit', () => {
     it('should postMessage the toolkit loaded message', () => {
       const { postMessageSpy, ynabToolkit } = setup({ initialize: false });
       ynabToolkit.initializeToolkit();
-      expect(postMessageSpy).toHaveBeenCalledWith({ type: OutboundMessageType.ToolkitLoaded }, '*');
+      expect(postMessageSpy).toHaveBeenCalledWith(
+        { type: OutboundMessageType.ToolkitLoaded },
+        'https://app.ynab.com',
+      );
     });
   });
 

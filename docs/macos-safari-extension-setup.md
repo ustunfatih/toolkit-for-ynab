@@ -1,5 +1,7 @@
 # macOS Safari Web Extension project setup
 
+This fork treats Safari as the primary release target. The generated Xcode project should be considered build output from the metadata in `safari/project.yml`, not the long-term source of truth.
+
 This repository only contains the WebExtension source; the macOS host app and Safari Web Extension Xcode project need to be created on a Mac. The steps below give you a ready-to-open Xcode project, assign bundle identifiers, add entitlements, and keep the host app metadata aligned with the WebExtension manifest.
 
 ## Prerequisites (on your Mac)
@@ -13,11 +15,11 @@ This repository only contains the WebExtension source; the macOS host app and Sa
 yarn install
 yarn build:ios
 xcrun safari-web-extension-converter ./dist/extension \
-  --app-name "Toolkit for YNAB" \
+  --app-name "OpenBudget for YNAB" \
   --project-location ./macos \
   --bundle-identifier com.example.toolkit
 ```
-- The converter creates `./macos/Toolkit for YNAB/Toolkit for YNAB.xcodeproj` with a **macOS host app** and a **Safari Web Extension** target.
+- The converter creates `./macos/OpenBudget for YNAB/OpenBudget for YNAB.xcodeproj` with a **macOS host app** and a **Safari Web Extension** target.
 - Use your own bundle root (e.g., `com.yourcompany.toolkit`). The extension target will be suffixed automatically (e.g., `.Extension`).
 
 ## 2) Set unique bundle identifiers
@@ -38,8 +40,8 @@ In the host app and extension **Signing & Capabilities** tabs, add:
 - If you use shared containers or app groups later, add them here for both targets with matching IDs.
 
 ## 5) Align Info.plist metadata with the WebExtension manifest
-- Open `Toolkit for YNAB/Info.plist` (host app target) and set:
-  - `CFBundleDisplayName` = `Toolkit for YNAB`
+- Open the host app `Info.plist` and set:
+  - `CFBundleDisplayName` = `OpenBudget for YNAB`
   - `CFBundleShortVersionString` = `3.19.0`
   - `CFBundleVersion` can start at `1` and increment per build.
 - Keep these values in sync with `src/manifest.json` (`name` and `version`). After bumping the manifest version, update `CFBundleShortVersionString` to match.
@@ -60,7 +62,7 @@ When you update the WebExtension code:
 ## 8) If you prefer a generator-driven project
 You can use [XcodeGen](https://github.com/yonaskolb/XcodeGen) instead of keeping the `.xcodeproj` in Git. A minimal `project.yml` (placed in `macos/`) could look like:
 ```yaml
-name: Toolkit for YNAB
+name: OpenBudget for YNAB
 options:
   bundleIdPrefix: com.yourcompany.toolkit
 packages: {}
@@ -73,7 +75,7 @@ targets:
     info:
       path: Info.plist
       properties:
-        CFBundleDisplayName: Toolkit for YNAB
+        CFBundleDisplayName: OpenBudget for YNAB
         CFBundleShortVersionString: 3.19.0
         CFBundleVersion: "1"
     sources: [HostApp]

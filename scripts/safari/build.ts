@@ -15,6 +15,7 @@ import { execSync, spawnSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 import yargs from 'yargs';
+import { APP_CONFIG } from '../lib/appConfig';
 import { WORKSPACE_ROOT } from '../lib/paths';
 
 interface BuildOptions {
@@ -126,7 +127,7 @@ async function main(): Promise<void> {
     } else {
       const safariDir = path.join(WORKSPACE_ROOT, 'safari');
       run('xcodegen generate', safariDir);
-      console.log('Xcode project generated: safari/Toolkit for YNAB.xcodeproj');
+      console.log(`Xcode project generated: safari/${APP_CONFIG.displayName}.xcodeproj`);
     }
   } else {
     console.log('\n[4/4] Skipping Xcode project generation (use --generate-xcode to enable)');
@@ -146,13 +147,13 @@ async function main(): Promise<void> {
       process.exit(1);
     }
 
-    const xcodeproj = path.join(WORKSPACE_ROOT, 'safari', 'Toolkit for YNAB.xcodeproj');
+    const xcodeproj = path.join(WORKSPACE_ROOT, 'safari', `${APP_CONFIG.displayName}.xcodeproj`);
     if (!fs.existsSync(xcodeproj)) {
       console.error('Error: Xcode project not found. Run with --generate-xcode first.');
       process.exit(1);
     }
 
-    let buildCommand = `xcodebuild -project "${xcodeproj}" -scheme "Toolkit for YNAB" -configuration ${options.configuration}`;
+    let buildCommand = `xcodebuild -project "${xcodeproj}" -scheme "${APP_CONFIG.displayName}" -configuration ${options.configuration}`;
 
     if (options.teamId) {
       buildCommand += ` DEVELOPMENT_TEAM=${options.teamId}`;
@@ -172,7 +173,7 @@ async function main(): Promise<void> {
     console.log('\nNext steps (on macOS):');
     console.log('  1. cd safari');
     console.log('  2. xcodegen generate');
-    console.log('  3. open "Toolkit for YNAB.xcodeproj"');
+    console.log(`  3. open "${APP_CONFIG.displayName}.xcodeproj"`);
   }
 }
 

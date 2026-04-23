@@ -7,23 +7,69 @@
   margin: 0 auto;
   display: grid;
   gap: 2rem;
-  padding: 1rem;
+  padding: 1.5rem 1rem 3rem;
   grid-template-columns: 150px 1fr;
   grid-template-rows: 50px 1fr;
 
   header {
     grid-row: 1/2;
     grid-column: 2/3;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1.5rem;
+    padding: 1.25rem;
+    border-radius: 28px;
+    background:
+      radial-gradient(circle at top left, rgba(14, 165, 233, 0.12), transparent 32%),
+      linear-gradient(145deg, rgba(15, 23, 42, 0.06), transparent 68%),
+      var(--tk-background-color);
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
 
-    img {
-      height: 50px;
+    .tk-brand-panel {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
 
-      @include ui.dark-mode {
-        filter: drop-shadow(0px 0px 5px white);
+      img {
+        height: 72px;
+
+        @include ui.dark-mode {
+          filter: drop-shadow(0px 0px 5px white);
+        }
       }
+
+      .tk-brand-copy {
+        display: grid;
+        gap: 0.3rem;
+
+        h1 {
+          margin: 0;
+          font-size: 1.9rem;
+          line-height: 1;
+        }
+
+        p {
+          margin: 0;
+          max-width: 42rem;
+          opacity: 0.78;
+          line-height: 1.45;
+        }
+
+        &__eyebrow {
+          font-size: 0.75rem;
+          text-transform: uppercase;
+          letter-spacing: 0.18em;
+          opacity: 0.72;
+          font-weight: 700;
+        }
+      }
+    }
+
+    .tk-header-controls {
+      display: grid;
+      gap: 0.75rem;
+      align-content: center;
+      justify-items: end;
     }
 
     .tk-search-input {
@@ -34,9 +80,8 @@
       color: var(--tk-search-text);
       font-weight: 500;
       font-family: inherit;
-      max-width: 200px;
-      flex: 1;
-      text-align: center;
+      width: min(100%, 250px);
+      text-align: left;
 
       &::placeholder {
         color: var(--tk-search-placeholder);
@@ -77,10 +122,12 @@
     padding-bottom: 80vh;
 
     section {
+      scroll-margin-top: 2rem;
+
       h2 {
         margin: 0;
         margin-bottom: 1rem;
-        margin-left: 5rem;
+        margin-left: 0;
         font-weight: 500;
         font-size: 2rem;
       }
@@ -94,9 +141,38 @@
   }
 }
 
+.tk-overview-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  border-radius: 24px;
+  background: color-mix(in srgb, var(--tk-search-bg) 88%, transparent);
+
+  p {
+    margin: 0.4rem 0 0;
+    line-height: 1.5;
+    opacity: 0.82;
+  }
+
+  &__links {
+    display: flex;
+    gap: 0.9rem;
+    align-items: flex-start;
+    white-space: nowrap;
+
+    a {
+      color: var(--tk-text-color);
+    }
+  }
+}
+
 .setting {
   display: flex;
   align-items: center;
+  padding: 1rem 1.1rem;
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--tk-background-color) 92%, #0f172a 8%);
 
   &__toggle {
     margin-bottom: auto;
@@ -136,7 +212,7 @@
   &__description {
     margin-top: 0.5rem;
     font-size: 0.9rem;
-    line-height: 1.2rem;
+    line-height: 1.4rem;
   }
 
   &--select {
@@ -170,6 +246,48 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+}
+
+@media (max-width: 900px) {
+  .tk-options-root {
+    min-width: 0;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr;
+
+    header,
+    nav.tk-toc,
+    .tk-content {
+      grid-column: auto;
+      grid-row: auto;
+    }
+
+    header {
+      grid-template-columns: 1fr;
+
+      .tk-header-controls {
+        justify-items: stretch;
+      }
+
+      .tk-actions {
+        justify-content: space-between;
+      }
+    }
+
+    nav.tk-toc {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      position: static;
+    }
+  }
+
+  .tk-overview-card {
+    flex-direction: column;
+
+    &__links {
+      flex-wrap: wrap;
+    }
   }
 }
 

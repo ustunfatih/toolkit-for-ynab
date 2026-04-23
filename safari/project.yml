@@ -1,6 +1,6 @@
-name: Toolkit for YNAB
+name: OpenBudget for YNAB
 options:
-  bundleIdPrefix: com.toolkitforynab
+  bundleIdPrefix: com.fatihustun.openbudgetforynab
   deploymentTarget:
     macOS: '12.0'
   xcodeVersion: '15.0'
@@ -10,11 +10,11 @@ options:
 
 settings:
   base:
-    MARKETING_VERSION: 3.19.0
+    MARKETING_VERSION: 3.20.0
     CURRENT_PROJECT_VERSION: '1'
 
 targets:
-  Toolkit for YNAB:
+  OpenBudget for YNAB:
     type: application
     platform: macOS
     sources:
@@ -24,7 +24,7 @@ targets:
     info:
       path: HostApp/Info.plist
       properties:
-        CFBundleDisplayName: Toolkit for YNAB
+        CFBundleDisplayName: OpenBudget for YNAB
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         LSApplicationCategoryType: public.app-category.productivity
@@ -36,14 +36,14 @@ targets:
         com.apple.security.app-sandbox: true
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.toolkitforynab.Toolkit-for-YNAB
-        PRODUCT_NAME: 'Toolkit for YNAB'
+        PRODUCT_BUNDLE_IDENTIFIER: com.fatihustun.openbudgetforynab.OpenBudget-for-YNAB
+        PRODUCT_NAME: 'OpenBudget for YNAB'
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         CODE_SIGN_STYLE: Automatic
         CODE_SIGN_IDENTITY: '-'
         ENABLE_HARDENED_RUNTIME: YES
     dependencies:
-      - target: Toolkit for YNAB Extension
+      - target: OpenBudget for YNAB Extension
         embed: true
         codeSign: true
         copyPhase:
@@ -52,7 +52,7 @@ targets:
       testTargets: []
       gatherCoverageData: false
 
-  Toolkit for YNAB Extension:
+  OpenBudget for YNAB Extension:
     type: app-extension
     platform: macOS
     sources:
@@ -83,7 +83,7 @@ targets:
     info:
       path: Extension/Info.plist
       properties:
-        CFBundleDisplayName: Toolkit for YNAB Extension
+        CFBundleDisplayName: OpenBudget for YNAB Extension
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         NSExtension:
@@ -95,19 +95,19 @@ targets:
         com.apple.security.app-sandbox: true
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.toolkitforynab.Toolkit-for-YNAB.Extension
-        PRODUCT_NAME: 'Toolkit for YNAB Extension'
+        PRODUCT_BUNDLE_IDENTIFIER: com.fatihustun.openbudgetforynab.OpenBudget-for-YNAB.Extension
+        PRODUCT_NAME: 'OpenBudget for YNAB Extension'
         CODE_SIGN_STYLE: Automatic
         CODE_SIGN_IDENTITY: '-'
         GENERATE_INFOPLIST_FILE: NO
         OTHER_LDFLAGS: ['-framework', 'SafariServices']
 
 schemes:
-  Toolkit for YNAB:
+  OpenBudget for YNAB:
     build:
       targets:
-        Toolkit for YNAB: all
-        Toolkit for YNAB Extension: all
+        OpenBudget for YNAB: all
+        OpenBudget for YNAB Extension: all
     run:
       config: Debug
     profile:

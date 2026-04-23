@@ -3,6 +3,7 @@
 import fs from 'fs';
 import path from 'path';
 import yargs from 'yargs';
+import { APP_CONFIG } from './lib/appConfig';
 import { MANIFEST_PATH, WORKSPACE_ROOT } from './lib/paths';
 
 const validOverrides = ['beta', 'development', 'ios', 'firefox', 'safari'] as const;
@@ -21,6 +22,25 @@ async function main() {
 
   // Clobber any keys in the beta manifest across.
   Object.assign(manifest, changes);
+
+  const manifestName =
+    type === 'beta'
+      ? APP_CONFIG.betaDisplayName
+      : type === 'development'
+        ? APP_CONFIG.developmentDisplayName
+        : APP_CONFIG.displayName;
+
+  manifest.author = APP_CONFIG.author;
+  manifest.name = manifestName;
+  manifest.homepage_url = APP_CONFIG.homepageUrl;
+
+  if (manifest.action) {
+    manifest.action.default_title = APP_CONFIG.browserActionTitle;
+  }
+
+  if (manifest.browser_action) {
+    manifest.browser_action.default_title = APP_CONFIG.browserActionTitle;
+  }
 
   // If we're in a github action, append the build number to the version number.
   // if (process.env.GITHUB_RUN_NUMBER) {

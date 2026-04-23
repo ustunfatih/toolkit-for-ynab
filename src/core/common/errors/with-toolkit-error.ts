@@ -1,3 +1,4 @@
+import { getCurrentOrigin } from 'toolkit/core/common/app-config';
 import { Feature } from 'toolkit/extension/features/feature';
 
 export function withToolkitError(wrappedFunction: Function, feature: Feature | FeatureName) {
@@ -28,8 +29,8 @@ export function withToolkitError(wrappedFunction: Function, feature: Feature | F
 }
 
 /**
- * Logs an error to the console with extra context around the occurrence. Also sends a message to
- * the background script so it can inform Sentry of the error.
+ * Logs an error to the console with extra context around the occurrence and forwards a serialized
+ * event to the extension bridge so it can surface local diagnostics.
  */
 interface LogToolkitErrorInput {
   exception: unknown;
@@ -71,6 +72,6 @@ export function logToolkitError({
         serializedError,
       },
     },
-    '*',
+    getCurrentOrigin(),
   );
 }

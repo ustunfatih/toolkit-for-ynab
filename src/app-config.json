@@ -1,0 +1,19 @@
+{
+  "displayName": "OpenBudget for YNAB",
+  "extensionDisplayName": "OpenBudget for YNAB Extension",
+  "author": "Fatih Ustun",
+  "bundleIdPrefix": "com.fatihustun.openbudgetforynab",
+  "homepageUrl": "https://github.com/fatihustun/toolkit-for-ynab",
+  "supportUrl": "https://github.com/fatihustun/toolkit-for-ynab/issues",
+  "privacyUrl": "https://github.com/fatihustun/toolkit-for-ynab/blob/main/privacy-policy.md",
+  "releasesUrl": "https://github.com/fatihustun/toolkit-for-ynab/releases",
+  "browserActionTitle": "OpenBudget for YNAB",
+  "betaDisplayName": "OpenBudget for YNAB (Beta)",
+  "developmentDisplayName": "OpenBudget for YNAB (Development)",
+  "subtitle": "Unofficial Safari companion for YNAB",
+  "legalDisclaimer": "Unofficial app. Not affiliated with YNAB or its parent company.",
+  "supportedDomains": [
+    "https://app.youneedabudget.com/*",
+    "https://app.ynab.com/*"
+  ]
+}
