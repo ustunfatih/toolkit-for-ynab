@@ -1,18 +1,18 @@
 {
   "manifest_version": 3,
-  "author": "Toolkit for YNAB",
-  "name": "Toolkit for YNAB",
+  "author": "Fatih Ustun",
+  "name": "OpenBudget for YNAB",
   "description": "UI customizations and tweaks for the web version of YNAB.",
   "version": "3.20.0",
   "content_scripts": [
     {
-      "matches": ["*://*.youneedabudget.com/*", "*://*.ynab.com/*"],
+      "matches": ["https://app.youneedabudget.com/*", "https://app.ynab.com/*"],
       "all_frames": true,
       "run_at": "document_idle",
       "js": ["content-scripts/extension-bridge.js"]
     },
     {
-      "matches": ["*://*.youneedabudget.com/*", "*://*.ynab.com/*"],
+      "matches": ["https://app.youneedabudget.com/*", "https://app.ynab.com/*"],
       "all_frames": true,
       "run_at": "document_start",
       "js": ["content-scripts/enable-ember-debug.js"]
@@ -32,13 +32,13 @@
   "web_accessible_resources": [
     {
       "resources": ["assets/*", "web-accessibles/*"],
-      "matches": ["*://*.youneedabudget.com/*", "*://*.ynab.com/*"]
+      "matches": ["https://app.youneedabudget.com/*", "https://app.ynab.com/*"]
     }
   ],
   "background": {
     "service_worker": "background/background.js"
   },
-  "homepage_url": "https://github.com/toolkit-for-ynab/toolkit-for-ynab/",
+  "homepage_url": "https://github.com/fatihustun/toolkit-for-ynab",
   "options_ui": {
     "open_in_tab": true,
     "page": "options/index.html"
@@ -46,9 +46,9 @@
 
   "action": {
     "default_icon": "assets/images/icons/button.png",
-    "default_title": "Toolkit for YNAB",
+    "default_title": "OpenBudget for YNAB",
     "default_popup": "popup/index.html"
   },
   "permissions": ["storage"],
-  "host_permissions": ["*://*.youneedabudget.com/*", "*://*.ynab.com/*"]
+  "host_permissions": ["https://app.youneedabudget.com/*", "https://app.ynab.com/*"]
 }

@@ -1,21 +1,19 @@
 <p align="center">
-  <img src="http://i.imgur.com/SJhwBpU.png" alt="Toolkit for YNAB">
+  <img src="http://i.imgur.com/SJhwBpU.png" alt="OpenBudget for YNAB">
 </p>
 
-[![Chat](https://img.shields.io/discord/743988612382589010?logo=discord)](https://discord.gg/jFKzZR2)
+# OpenBudget for YNAB
 
-# **Maintenance Mode (Looking for Maintainers)**
-
-**The Toolkit for YNAB is officially in maintenance mode. This means updates will be much more infrequent and will likely only contain bug fixes and not new features. We're actively looking for some new maintainers who are willing to take on the duties of the approving and releasing updates. Please reach out to Josh Madewell in our [Discord](https://discord.gg/jFKzZR2).**
-
-Toolkit for YNAB is a browser extension that enhances your experience with the YNAB Web Application.
+OpenBudget for YNAB is an unofficial Safari-first fork of the original Toolkit project. It focuses on packaging the extension as a polished macOS host app that is suitable for long-term use in Safari and ready to be finished for Mac App Store submission.
 
 ### Motivation
 
-YNAB have released an exciting new web version. Lots of power users of the older
-versions are asking for options that are easily implemented in a browser extension.
-Rather than ask the YNAB team to implement these features, let's just do it
-ourselves!
+This fork keeps the customization value of the original Toolkit while adding:
+
+- a macOS host app for Safari
+- privacy-first defaults without third-party crash reporting
+- a cleaner App Store release path
+- clearer onboarding for permanent use on one Mac
 
 ### [List of Features](/docs/feature-list.md)
 
@@ -23,20 +21,16 @@ You can find a full list of features [here](/docs/feature-list.md) and also on t
 page of the extension once you have installed it which is where you can configure these
 features to be on or off.
 
-### Installing
+### Safari Focus
 
-The Toolkit is available for Chrome, Firefox and Edge. The extension is built using [Browser (Web) Extension APIs](https://developer.mozilla.org/en-US/Add-ons/WebExtensions)
+Safari is a first-class target in this fork. The repo includes:
 
-If you don't want to build the extension from the source yourself, you can get it for
-each browser at the following links:
+- a Safari-specific Manifest V2 build
+- a macOS host app and Safari extension target under [`safari`](/safari)
+- build scripts for syncing versions and refreshing Safari resources
+- release guidance for App Store packaging
 
-- Chrome on the [Chrome Web Store](https://chrome.google.com/webstore/detail/toolkit-for-ynab/lmhdkkhepllpnondndgpgclfjnlofgjl)
-- Firefox on the [Firefox Add-on Repository](https://addons.mozilla.org/firefox/addon/toolkit-for-ynab/)
-- Microsoft Edge on the [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/toolkit-for-ynab/ldhelmfcfdmaeondkcdgcnbhneihejgc)
-
-Note: Since the extension is built with Web Extensions and that is not supported by Safari,
-the extension itself is not supported on Safari. When/if Safari decides to support Web Extensions
-we will do what we can to provide support for their browser.
+Chrome, Firefox, and Edge build paths are still present, but the primary product direction here is macOS Safari.
 
 ### Contributions
 
@@ -46,7 +40,7 @@ on the roadmap. If you can't find what you want to build on the roadmap, feel fr
 a note up on the GitHub issues board to let the team know you're working on something new.
 When your code is ready, submit a pull request.
 
-For documentation on how to build a feature, [see the documentation](https://github.com/toolkit-for-ynab/toolkit-for-ynab/blob/main/docs/building-features.md).
+For documentation on how to build a feature, see [docs/building-features.md](/docs/building-features.md).
 
 ### Building the Code
 
@@ -99,7 +93,13 @@ This extension uses three main things in its build process:
 
              web-ext run --no-reload --source-dir dist/extension/
 
-_You may need to reload the Chrome plugin if it's been already installed. Visit `chrome://extensions` and click the reload icon_
+    - Safari on macOS:
+      - Run `yarn safari:build`
+      - In `safari/`, generate or refresh the Xcode project
+      - Open the macOS host app target in Xcode
+      - Run the app, then enable the extension in Safari Settings > Extensions
+
+_You may need to reload the Chrome plugin if it's already installed. Visit `chrome://extensions` and click the reload icon_
 
 ![](https://camo.githubusercontent.com/4d41ad79a8241b062ea59fa332b39028c1469703/68747470733a2f2f636c2e6c792f31633167304633443142316f2f496d616765253230323031382d30362d3034253230617425323031362e32302e33342e706e67)
 
@@ -144,9 +144,9 @@ the LFs are different on that platform.
 
 ## Legal Stuff
 
-**IMPORTANT NOTE:** This extension is not affiliated with YNAB in any way and YNAB
-has not endorsed this at all. You Need a Budget and YNAB are registered trademarks
-of Steine LLC and/or one of its subsidiaries.
+**IMPORTANT NOTE:** OpenBudget for YNAB is not affiliated with YNAB in any way and
+has not been endorsed by it. You Need a Budget and YNAB are registered trademarks
+of their respective owners.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,

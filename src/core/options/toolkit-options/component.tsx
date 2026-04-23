@@ -13,12 +13,13 @@ import {
 import { Toggle } from 'toolkit/components/toggle';
 import { RadioGroup } from 'toolkit/components/radio-group';
 import fuzzysort from 'fuzzysort';
+import { APP_CONFIG } from 'toolkit/core/common/app-config';
 
 import './styles.scss';
 import { localToolkitStorage } from 'toolkit/core/common/storage';
 import { getBrowser } from 'toolkit/core/common/web-extensions';
 import { Modal } from 'toolkit/components/modal';
-import { DiscordLink, GitHubLink } from 'toolkit/components/links';
+import { GitHubLink, PrivacyPolicyLink, ReleaseNotesLink, SupportLink } from 'toolkit/components/links';
 import { useDarkModeSetter } from 'toolkit/hooks/useDarkModeSetter';
 import ReactMarkdown from 'react-markdown';
 import { useToolkitDisabled } from 'toolkit/hooks/useToolkitDisabled';
@@ -179,35 +180,26 @@ function HelpModal({
         <div>
           <h2>Who works on the Toolkit?</h2>
           <p>
-            We're a small community of developers (and YNABers) who work on the Toolkit in our free
-            time. You can find most of us over in our <DiscordLink>Discord Server</DiscordLink>.
+            OpenBudget for YNAB is an independent fork focused on Safari and Mac App Store
+            readiness. Release notes and source code live on <GitHubLink>GitHub</GitHubLink>.
           </p>
         </div>
         <div>
           <h2>Is the Toolkit safe?</h2>
-          <p>Simply put, yes.</p>
+          <p>It is designed to be privacy-first.</p>
           <p>
-            All browser extensions have the ability to send the data loaded or input into the site
-            you're viewing off to some other location. Fortunately, the Toolkit is open source
-            meaning all the code is made available to you in <GitHubLink>GitHub</GitHubLink>. The
-            only time we make "outside requests" is when you encounter an error which resulted in a
-            crash of the Toolkit. That error is sent to our error tracking at{' '}
-            <a target="_blank" rel="noreferrer noopener" href="https://sentry.io/">
-              Sentry.io
-            </a>
-            . We do not store any data whatsoever. Even the Toolkit settings are stored on your own
-            machine. Every time you load YNAB, the Toolkit gets that data from the browser to do
-            what it needs to do. If you trust YNAB with your data, then you should feel confident
-            that your data is safe.
+            Settings stay on your own machine through the browser storage API. This fork does not
+            send crash reports or analytics to a third-party telemetry service by default. You can
+            review the source on <GitHubLink>GitHub</GitHubLink> and the latest{' '}
+            <PrivacyPolicyLink>privacy policy</PrivacyPolicyLink> at any time.
           </p>
         </div>
         <div>
           <h2>A pop-up appeared telling me something went wrong with the Toolkit. What do I do?</h2>
           <p>
-            When you see this pop-up, it's usually because something changed on YNAB's side which
-            broke our functionality. At the very least, you should open a{' '}
-            <GitHubLink>bug report</GitHubLink> to help us identify we have an issue. If you'd like
-            to go a step further, you could try to do some investigation in the{' '}
+            When you see this pop-up, it usually means the YNAB web app changed and a feature needs
+            to be updated. Start by opening a <SupportLink>support issue</SupportLink>. If you'd
+            like to go a step further, you can capture details from the{' '}
             <a
               target="_blank"
               rel="noreferrer noopener"
@@ -221,33 +213,23 @@ function HelpModal({
         <div>
           <h2>How much does the Toolkit cost?</h2>
           <p>
-            So long as browsers continue to make it free to build extensions, the Toolkit for YNAB
-            will always be free! This is a hobby for all of us who work on the Toolkit and we're
-            just happy to provide something we believe our users enjoy.
+            This fork is intended to stay lightweight and user-friendly. Any App Store pricing or
+            distribution choices should be documented in the release notes for each build.
           </p>
         </div>
         <div>
           <h2>Can you add this feature I want?</h2>
           <p>
-            We use GitHub to track both feature requests and bugs. If you would like to request a
-            feature, search <GitHubLink>GitHub issues</GitHubLink>, there is a chance this feature
-            was already requested, don't create duplicate issues. If you didn't find anything,
-            create issue with your request on <GitHubLink>GitHub</GitHubLink>.
+            Feature requests and bug reports are tracked in the project support queue. Check the{' '}
+            <SupportLink>open issues</SupportLink> first, then file a new request if needed.
           </p>
         </div>
         <div>
           <h2>What feature is next?</h2>
           <p>
-            Since all the developers who work on the Toolkit do so in their free time, it usually
-            works out that the features we find most valuable ourselves are the features we work on
-            next. But don't lose hope! We also take into account popularity of feature request (in
-            form of comments or thumbs up reaction), so if you found that feature you'd like to see
-            in the Toolkit was already requested, give original message thumbs up reaction (or leave
-            comment if you have something to say). The higher the vote count (and the higher the
-            feasibility of actually building the feature) the more likely it is to get done! If
-            you're a developer and there's a feature you really want to added, feel free to open a{' '}
-            <GitHubLink>pull request</GitHubLink>! Also, join the <DiscordLink>Discord</DiscordLink>{' '}
-            to ask any questions you may have along the way!
+            The priority is Safari reliability, App Store compliance, and long-term compatibility
+            with the current YNAB web app. Check the <ReleaseNotesLink>release notes</ReleaseNotesLink>{' '}
+            for the latest progress and roadmap items.
           </p>
         </div>
       </div>
@@ -462,25 +444,38 @@ export function ToolkitOptions() {
       .filter((section) => section.settings.length !== 0);
   }, [searchQuery]);
 
+  useEffect(() => {
+    document.title = `${manifest.name} Settings`;
+  }, [manifest.name]);
+
   return (
     <div className="tk-options-root">
       <header>
-        <img src="../assets/images/logos/toolkitforynab-logo-200.png" />
-        <input
-          className="tk-search-input"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Search options"
-        />
+        <div className="tk-brand-panel">
+          <img src="../assets/images/logos/toolkitforynab-logo-200.png" alt={manifest.name} />
+          <div className="tk-brand-copy">
+            <span className="tk-brand-copy__eyebrow">{APP_CONFIG.subtitle}</span>
+            <h1>{manifest.name}</h1>
+            <p>{APP_CONFIG.legalDisclaimer}</p>
+          </div>
+        </div>
+        <div className="tk-header-controls">
+          <input
+            className="tk-search-input"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search settings"
+          />
 
-        <div className="tk-actions">
-          <Button size="s" onClick={() => setIsImportModalOpen(true)}>
-            Export & Import
-          </Button>
-          <Button size="s" onClick={() => setIsHelpModalOpen(true)}>
-            Help
-          </Button>
-          <DarkModeToggle />
+          <div className="tk-actions">
+            <Button size="s" onClick={() => setIsImportModalOpen(true)}>
+              Export & Import
+            </Button>
+            <Button size="s" onClick={() => setIsHelpModalOpen(true)}>
+              Help
+            </Button>
+            <DarkModeToggle />
+          </div>
         </div>
       </header>
       <nav className="tk-toc">
@@ -510,6 +505,20 @@ export function ToolkitOptions() {
             </Button>
           </AlertBanner>
         )}
+        <div className="tk-overview-card">
+          <div>
+            <strong>Safari-first setup</strong>
+            <p>
+              This fork targets the YNAB web app in Safari on this Mac. Settings stay local, and
+              support/privacy details are available before you ship to the App Store.
+            </p>
+          </div>
+          <div className="tk-overview-card__links">
+            <SupportLink>Support</SupportLink>
+            <PrivacyPolicyLink>Privacy</PrivacyPolicyLink>
+            <ReleaseNotesLink>Release Notes</ReleaseNotesLink>
+          </div>
+        </div>
         {filteredSections.map((section) => {
           return (
             <Section

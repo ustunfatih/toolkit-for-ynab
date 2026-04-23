@@ -28,14 +28,14 @@ Use this checklist before submitting the macOS host app + Safari extension to Ap
 ## 4. Privacy and Compliance
 
 - [ ] `PrivacyInfo.xcprivacy` accurately reflects collected data and accessed APIs.
-- [ ] App Store Connect privacy answers match runtime behavior (including Sentry/error reporting).
+- [ ] App Store Connect privacy answers match runtime behavior and confirm that third-party telemetry is disabled unless intentionally reintroduced.
 - [ ] In-app and repo privacy policy matches real data handling.
 - [ ] Third-party SDK declarations are complete and current.
 
 ## 5. App UX and Store Metadata
 
 - [ ] Host app launches and correctly opens Safari extension settings.
-- [ ] First-run instructions clearly explain how to enable the extension in Safari.
+- [ ] First-run instructions clearly explain how to enable the extension in Safari and how to recover after Safari disables it during an update.
 - [ ] App icon set and extension icons are complete and high quality.
 - [ ] App Store listing assets prepared: subtitle, description, keywords, support URL, privacy URL, screenshots.
 

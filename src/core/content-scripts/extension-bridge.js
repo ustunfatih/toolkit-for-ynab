@@ -1,6 +1,7 @@
 import { getBrowser } from 'toolkit/core/common/web-extensions';
 import { ToolkitStorage, FEATURE_SETTING_PREFIX } from 'toolkit/core/common/storage';
 import { allToolkitSettings, getUserSettings } from 'toolkit/core/settings';
+import { APP_CONFIG, getCurrentOrigin } from 'toolkit/core/common/app-config';
 import { getEnvironment } from 'toolkit/core/common/web-extensions';
 import { InboundMessageType, OutboundMessageType } from '../messages';
 
@@ -22,16 +23,25 @@ function sendToolkitBootstrap(options) {
         },
         environment,
         extensionId: browser.runtime.id,
+        links: {
+          privacy: APP_CONFIG.privacyUrl,
+          releases: APP_CONFIG.releasesUrl,
+          support: APP_CONFIG.supportUrl,
+        },
         name: manifest.name,
         options,
         version: manifest.version,
       },
     },
-    '*',
+    getCurrentOrigin(),
   );
 }
 
 function toolkitMessageHandler(event) {
+  if (event.source !== window || event.origin !== window.location.origin) {
+    return;
+  }
+
   if (event.data && event.data.type) {
     switch (event.data.type) {
       case OutboundMessageType.ToolkitLoaded:
@@ -41,7 +51,13 @@ function toolkitMessageHandler(event) {
         handleToolkitError(event.data.context);
         break;
       case 'ynab-toolkit-set-setting':
-        handleSetFeatureSetting(event.data.setting);
+        if (
+          event.data.setting &&
+          typeof event.data.setting.name === 'string' &&
+          allToolkitSettings.some(({ name }) => name === event.data.setting.name)
+        ) {
+          handleSetFeatureSetting(event.data.setting);
+        }
     }
   }
 }
@@ -56,13 +72,16 @@ function handleSetFeatureSetting({ name, value }) {
 
 function handleFeatureSettingChanged(settingName, newValue) {
   if (settingName.startsWith(FEATURE_SETTING_PREFIX)) {
-    window.postMessage({
-      type: InboundMessageType.SettingChanged,
-      setting: {
-        name: settingName.slice(FEATURE_SETTING_PREFIX.length),
-        value: newValue,
+    window.postMessage(
+      {
+        type: InboundMessageType.SettingChanged,
+        setting: {
+          name: settingName.slice(FEATURE_SETTING_PREFIX.length),
+          value: newValue,
+        },
       },
-    });
+      getCurrentOrigin(),
+    );
   }
 }
 

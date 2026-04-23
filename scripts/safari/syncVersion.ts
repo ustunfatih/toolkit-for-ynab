@@ -6,6 +6,7 @@
 
 import fs from 'fs';
 import path from 'path';
+import { APP_CONFIG } from '../lib/appConfig';
 import { WORKSPACE_ROOT } from '../lib/paths';
 
 const PACKAGE_JSON_PATH = path.join(WORKSPACE_ROOT, 'package.json');
@@ -53,6 +54,21 @@ function updateProjectYmlVersion(ymlPath: string, version: string): void {
   fs.writeFileSync(ymlPath, content);
 }
 
+function updateProjectMetadata(ymlPath: string): void {
+  if (!fs.existsSync(ymlPath)) {
+    return;
+  }
+
+  let content = fs.readFileSync(ymlPath, 'utf-8');
+
+  content = content.replace(/^name: .*$/m, `name: ${APP_CONFIG.displayName}`);
+  content = content.replace(/^  bundleIdPrefix: .*$/m, `  bundleIdPrefix: ${APP_CONFIG.bundleIdPrefix}`);
+  content = content.replace(/Toolkit for YNAB Extension/g, APP_CONFIG.extensionDisplayName);
+  content = content.replace(/Toolkit for YNAB/g, APP_CONFIG.displayName);
+
+  fs.writeFileSync(ymlPath, content);
+}
+
 async function main(): Promise<void> {
   console.log('Syncing version to Safari project...');
 
@@ -78,6 +94,7 @@ async function main(): Promise<void> {
 
   // Update project.yml
   updateProjectYmlVersion(PROJECT_YML, version);
+  updateProjectMetadata(PROJECT_YML);
 
   console.log(`Version sync complete: ${version}`);
 }

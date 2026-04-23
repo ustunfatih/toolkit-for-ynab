@@ -10,7 +10,7 @@ export type BootstrapMessage = MessageEvent<{
   type: InboundMessageType.Bootstrap;
   ynabToolKit: Pick<
     YNABToolkitObject,
-    'assets' | 'environment' | 'extensionId' | 'name' | 'options' | 'version'
+    'assets' | 'environment' | 'extensionId' | 'links' | 'name' | 'options' | 'version'
   >;
 }>;
 
