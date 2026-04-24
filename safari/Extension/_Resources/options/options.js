@@ -19543,13 +19543,14 @@ a {
   gap: 2rem;
   padding: 1.5rem 1rem 3rem;
   grid-template-columns: 150px 1fr;
-  grid-template-rows: 50px 1fr;
+  grid-template-rows: auto 1fr;
 }
 .tk-options-root header {
   grid-row: 1/2;
   grid-column: 2/3;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 320px);
+  align-items: start;
   gap: 1.5rem;
   padding: 1.25rem;
   border-radius: 28px;
@@ -19558,11 +19559,13 @@ a {
 }
 .tk-options-root header .tk-brand-panel {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
+  min-width: 0;
 }
 .tk-options-root header .tk-brand-panel img {
   height: 72px;
+  flex: 0 0 auto;
 }
 html[data-theme=dark] .tk-options-root header .tk-brand-panel img {
   filter: drop-shadow(0px 0px 5px white);
@@ -19576,11 +19579,13 @@ html[data-theme=dark] .tk-options-root header .tk-brand-panel img {
 .tk-options-root header .tk-brand-panel .tk-brand-copy {
   display: grid;
   gap: 0.3rem;
+  min-width: 0;
 }
 .tk-options-root header .tk-brand-panel .tk-brand-copy h1 {
   margin: 0;
   font-size: 1.9rem;
-  line-height: 1;
+  line-height: 1.08;
+  overflow-wrap: anywhere;
 }
 .tk-options-root header .tk-brand-panel .tk-brand-copy p {
   margin: 0;
@@ -19598,8 +19603,9 @@ html[data-theme=dark] .tk-options-root header .tk-brand-panel img {
 .tk-options-root header .tk-header-controls {
   display: grid;
   gap: 0.75rem;
-  align-content: center;
-  justify-items: end;
+  align-content: start;
+  justify-items: stretch;
+  min-width: 0;
 }
 .tk-options-root header .tk-search-input {
   border: none;
@@ -19609,7 +19615,8 @@ html[data-theme=dark] .tk-options-root header .tk-brand-panel img {
   color: var(--tk-search-text);
   font-weight: 500;
   font-family: inherit;
-  width: min(100%, 250px);
+  width: 100%;
+  box-sizing: border-box;
   text-align: left;
 }
 .tk-options-root header .tk-search-input::placeholder {
@@ -19623,6 +19630,11 @@ html[data-theme=dark] .tk-options-root header .tk-brand-panel img {
 .tk-options-root header .tk-actions {
   display: flex;
   gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.tk-options-root header .tk-actions button {
+  white-space: nowrap;
 }
 .tk-options-root nav.tk-toc {
   grid-row: 2/3;
@@ -19677,7 +19689,9 @@ html[data-theme=dark] .tk-options-root header .tk-brand-panel img {
   display: flex;
   gap: 0.9rem;
   align-items: flex-start;
-  white-space: nowrap;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  min-width: min(100%, 260px);
 }
 .tk-overview-card__links a {
   color: var(--tk-text-color);
