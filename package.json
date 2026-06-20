@@ -1,7 +1,8 @@
 {
-  "name": "openbudget-for-ynab",
+  "name": "toolkit-for-ynab-safari",
   "version": "3.20.0",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "prepare": "husky install",
     "build:check": "yarn && yarn gen",
@@ -25,6 +26,9 @@
     "safari:sync-version": "ts-node scripts/safari/syncVersion.ts",
     "safari:build": "ts-node scripts/safari/build.ts",
     "safari:build-full": "ts-node scripts/safari/build.ts --generate-xcode",
+    "safari:prepare-release": "ts-node scripts/safari/prepareRelease.ts",
+    "safari:audit-release": "ts-node scripts/safari/auditRelease.ts",
+    "safari:package-release": "ts-node scripts/safari/packageRelease.ts",
     "webpack:beta": "yarn build:webpack --env buildType=beta",
     "webpack:development": "yarn build:webpack --env buildType=development",
     "webpack:production": "yarn build:webpack --env buildType=production",

@@ -294,5 +294,5 @@ If a cell is zero in the Income v. Expense report, replace it with an empty cell
 Provides a highlight over the currently hovered row on the native YNAB Income vs Expense report.</details>
 <details><summary>Advanced (Click to Expand/Collapse)</summary>
 
-## Disable OpenBudget for YNAB
+## Disable Toolkit for YNAB
 Turn all features on and off with a single switch.</details>

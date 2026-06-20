@@ -1,10 +1,10 @@
 <p align="center">
-  <img src="http://i.imgur.com/SJhwBpU.png" alt="OpenBudget for YNAB">
+  <img src="http://i.imgur.com/SJhwBpU.png" alt="Toolkit for YNAB">
 </p>
 
-# OpenBudget for YNAB
+# Toolkit for YNAB
 
-OpenBudget for YNAB is an unofficial Safari-first fork of the original Toolkit project. It focuses on packaging the extension as a polished macOS host app that is suitable for long-term use in Safari and ready to be finished for Mac App Store submission.
+Toolkit for YNAB is an unofficial Safari-first fork of the original Toolkit project. It focuses on packaging the extension as a polished macOS host app suitable for permanent notarized installation and eventual Mac App Store submission.
 
 ### Motivation
 
@@ -94,10 +94,11 @@ This extension uses three main things in its build process:
              web-ext run --no-reload --source-dir dist/extension/
 
     - Safari on macOS:
-      - Run `yarn safari:build`
-      - In `safari/`, generate or refresh the Xcode project
+      - Run `yarn safari:build-full`
+      - Open `safari/Toolkit for YNAB.xcodeproj`
       - Open the macOS host app target in Xcode
       - Run the app, then enable the extension in Safari Settings > Extensions
+      - See [`docs/safari-distribution-playbook.md`](/docs/safari-distribution-playbook.md) for permanent and App Store distribution
 
 _You may need to reload the Chrome plugin if it's already installed. Visit `chrome://extensions` and click the reload icon_
 
@@ -144,7 +145,7 @@ the LFs are different on that platform.
 
 ## Legal Stuff
 
-**IMPORTANT NOTE:** OpenBudget for YNAB is not affiliated with YNAB in any way and
+**IMPORTANT NOTE:** Toolkit for YNAB is not affiliated with YNAB in any way and
 has not been endorsed by it. You Need a Budget and YNAB are registered trademarks
 of their respective owners.
 
