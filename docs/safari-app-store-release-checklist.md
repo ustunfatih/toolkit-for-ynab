@@ -1,62 +1,57 @@
-# Safari App Store Release Checklist
+# Safari release checklist
 
-Use this checklist before submitting the macOS host app + Safari extension to App Store Connect.
+Complete the shared gates before every direct, TestFlight, or Mac App Store build.
 
-## 1. Code Health Gates
+## Shared gates
 
+- [ ] Paid Apple Developer Program membership is active.
+- [ ] Host App ID is `com.ustunfatih.toolkitforynab`.
+- [ ] Extension App ID is `com.ustunfatih.toolkitforynab.Extension`.
+- [ ] Both targets use the paid team and automatic signing; no signing identity is hardcoded.
+- [ ] Version is `3.20.0`; build number is unique for this upload.
 - [ ] `yarn lint` passes.
 - [ ] `yarn type-check` passes.
 - [ ] `yarn test --runInBand` passes.
-- [ ] `yarn build:safari` passes with no blocking warnings.
-- [ ] `yarn safari:build --skip-web-build` successfully refreshes `safari/Extension/_Resources`.
+- [ ] `yarn safari:prepare-release --build-number 1` passes for the first release; omit the flag to increment later builds.
+- [ ] `yarn safari:audit-release` passes.
+- [ ] Safari requests only `https://app.ynab.com/*` and `storage`.
+- [ ] Runtime contains no Sentry, Raven, analytics, or crash-report upload.
+- [ ] Privacy manifest and public privacy policy match runtime behavior.
+- [ ] Current dependency, network, privacy, and license findings in `docs/safari-release-audit.md` are reviewed.
 
-## 2. Safari Extension Packaging
+## Direct Developer ID distribution
 
-- [ ] `src/manifest.safari.json` has only required permissions.
-- [ ] Host permissions are scoped to production domains actually needed by the extension.
-- [ ] `safari/Extension/_Resources/manifest.json` is regenerated from the latest source before archive.
-- [ ] Extension and host app versions match (`package.json`, `MARKETING_VERSION`, `CFBundleShortVersionString`).
-- [ ] `CURRENT_PROJECT_VERSION` / build number is incremented for each upload.
+- [ ] A **Developer ID Application** certificate is present in Keychain.
+- [ ] Release archive has Hardened Runtime enabled and valid host/extension signatures.
+- [ ] Organizer **Developer ID > Upload** notarization succeeds.
+- [ ] Exported app has a stapled notarization ticket.
+- [ ] `yarn safari:package-release --app "/path/to/Toolkit for YNAB.app"` passes and creates the versioned ZIP.
+- [ ] ZIP is tested through Gatekeeper on a second Mac before publishing privately.
 
-## 3. Signing, Identifiers, and Teams
+## TestFlight and Mac App Store
 
-- [ ] Bundle identifiers are unique for your fork and Apple account.
-- [ ] Xcode target Team is your own developer team (host app + extension).
-- [ ] Signing style is valid for App Store distribution in Release builds.
-- [ ] Entitlements match expected sandbox requirements.
+- [ ] App Store Connect macOS app record uses the host bundle ID.
+- [ ] Build `3.20.0 (N)` validates and uploads through Organizer.
+- [ ] Privacy URL and support URL are public without authentication.
+- [ ] App Privacy answers declare no collected data, unless a fresh audit proves otherwise.
+- [ ] At least one accepted 16:10 Mac screenshot is uploaded, such as `2560x1600`.
+- [ ] Description, subtitle, keywords, Productivity category, age rating, availability, copyright, and export compliance are complete.
+- [ ] Review notes explain Safari enablement and the `app.ynab.com` permission.
+- [ ] Reviewer receives a working sample YNAB account and budget that contains no personal data.
+- [ ] Name, icon, YNAB references, upstream attribution, and trademark usage have been cleared before public submission.
 
-## 4. Privacy and Compliance
+## Clean-Mac acceptance
 
-- [ ] `PrivacyInfo.xcprivacy` accurately reflects collected data and accessed APIs.
-- [ ] App Store Connect privacy answers match runtime behavior and confirm that third-party telemetry is disabled unless intentionally reintroduced.
-- [ ] In-app and repo privacy policy matches real data handling.
-- [ ] Third-party SDK declarations are complete and current.
+- [ ] First launch discovers the extension.
+- [ ] Enable, disable, and website-permission changes behave correctly.
+- [ ] Extension remains installed after Safari and macOS restarts.
+- [ ] Popup and options pages load; settings survive restart.
+- [ ] Representative budget, account, report, and bulk-edit features work.
+- [ ] Updating over an older signed build preserves settings.
+- [ ] No **Allow Unsigned Extensions** setting is required.
 
-## 5. App UX and Store Metadata
+## Fork safety
 
-- [ ] Host app launches and correctly opens Safari extension settings.
-- [ ] First-run instructions clearly explain how to enable the extension in Safari and how to recover after Safari disables it during an update.
-- [ ] App icon set and extension icons are complete and high quality.
-- [ ] App Store listing assets prepared: subtitle, description, keywords, support URL, privacy URL, screenshots.
-
-## 6. Functional QA (Safari)
-
-- [ ] Extension enables successfully from Safari Settings > Extensions.
-- [ ] Popup loads without errors.
-- [ ] Options page loads and persists settings.
-- [ ] Content scripts execute only on intended YNAB domains.
-- [ ] No critical console/runtime errors in background page or page context.
-
-## 7. Release Pipeline
-
-- [ ] Archive with Xcode `Release` configuration.
-- [ ] Validate archive in Organizer.
-- [ ] Upload to App Store Connect.
-- [ ] Complete TestFlight smoke test before production release.
-- [ ] Tag and document release notes in your fork.
-
-## 8. Fork-Safety Guardrails
-
-- [ ] Ensure `origin` points to your fork and `upstream` is read-only.
-- [ ] Create PRs only against branches in your fork.
-- [ ] Never push release branches directly to the upstream project.
+- [ ] `origin` is `ustunfatih/toolkit-for-ynab`.
+- [ ] Release PR targets `origin/develop` inside the fork.
+- [ ] Nothing is pushed and no PR is opened against `toolkit-for-ynab/toolkit-for-ynab`.

@@ -59,7 +59,7 @@ class Background {
       }
     });
     _defineProperty(this, "_handleException", context => {
-      console.groupCollapsed(`[OpenBudget] ${context.featureName || 'unknown'} error`);
+      console.groupCollapsed(`[Toolkit for YNAB] ${context.featureName || 'unknown'} error`);
       console.error(context.serializedError);
       console.info('Feature setting:', context.featureSetting);
       console.info('Function:', context.functionName);

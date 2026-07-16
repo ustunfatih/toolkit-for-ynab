@@ -19,7 +19,12 @@ import './styles.scss';
 import { localToolkitStorage } from 'toolkit/core/common/storage';
 import { getBrowser } from 'toolkit/core/common/web-extensions';
 import { Modal } from 'toolkit/components/modal';
-import { GitHubLink, PrivacyPolicyLink, ReleaseNotesLink, SupportLink } from 'toolkit/components/links';
+import {
+  GitHubLink,
+  PrivacyPolicyLink,
+  ReleaseNotesLink,
+  SupportLink,
+} from 'toolkit/components/links';
 import { useDarkModeSetter } from 'toolkit/hooks/useDarkModeSetter';
 import ReactMarkdown from 'react-markdown';
 import { useToolkitDisabled } from 'toolkit/hooks/useToolkitDisabled';
@@ -180,8 +185,8 @@ function HelpModal({
         <div>
           <h2>Who works on the Toolkit?</h2>
           <p>
-            OpenBudget for YNAB is an independent fork focused on Safari and Mac App Store
-            readiness. Release notes and source code live on <GitHubLink>GitHub</GitHubLink>.
+            Toolkit for YNAB is an independent fork focused on Safari and Mac App Store readiness.
+            Release notes and source code live on <GitHubLink>GitHub</GitHubLink>.
           </p>
         </div>
         <div>
@@ -228,8 +233,9 @@ function HelpModal({
           <h2>What feature is next?</h2>
           <p>
             The priority is Safari reliability, App Store compliance, and long-term compatibility
-            with the current YNAB web app. Check the <ReleaseNotesLink>release notes</ReleaseNotesLink>{' '}
-            for the latest progress and roadmap items.
+            with the current YNAB web app. Check the{' '}
+            <ReleaseNotesLink>release notes</ReleaseNotesLink> for the latest progress and roadmap
+            items.
           </p>
         </div>
       </div>

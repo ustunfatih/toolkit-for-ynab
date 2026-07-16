@@ -1266,7 +1266,7 @@ const settingsMap = {
         "type": "checkbox",
         "default": false,
         "section": "advanced",
-        "title": "Disable OpenBudget for YNAB",
+        "title": "Disable Toolkit for YNAB",
         "description": "Turn all features on and off with a single switch."
     },
     "BudgetProgressBars": {
@@ -2164,7 +2164,7 @@ const getCurrentOrigin = () => typeof window !== 'undefined' && window.location?
 (module) {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"displayName":"OpenBudget for YNAB","extensionDisplayName":"OpenBudget for YNAB Extension","author":"Fatih Ustun","bundleIdPrefix":"com.fatihustun.openbudgetforynab","homepageUrl":"https://github.com/fatihustun/toolkit-for-ynab","supportUrl":"https://github.com/fatihustun/toolkit-for-ynab/issues","privacyUrl":"https://github.com/fatihustun/toolkit-for-ynab/blob/main/privacy-policy.md","releasesUrl":"https://github.com/fatihustun/toolkit-for-ynab/releases","browserActionTitle":"OpenBudget for YNAB","betaDisplayName":"OpenBudget for YNAB (Beta)","developmentDisplayName":"OpenBudget for YNAB (Development)","subtitle":"Unofficial Safari companion for YNAB","legalDisclaimer":"Unofficial app. Not affiliated with YNAB or its parent company.","supportedDomains":["https://app.youneedabudget.com/*","https://app.ynab.com/*"]}');
+module.exports = /*#__PURE__*/JSON.parse('{"displayName":"Toolkit for YNAB","extensionDisplayName":"Toolkit for YNAB Extension","author":"Fatih Ustun","bundleIdPrefix":"com.ustunfatih.toolkitforynab","hostBundleIdentifier":"com.ustunfatih.toolkitforynab","extensionBundleIdentifier":"com.ustunfatih.toolkitforynab.Extension","homepageUrl":"https://github.com/ustunfatih/toolkit-for-ynab","supportUrl":"https://github.com/ustunfatih/toolkit-for-ynab/issues","privacyUrl":"https://github.com/ustunfatih/toolkit-for-ynab/blob/develop/privacy-policy.md","releasesUrl":"https://github.com/ustunfatih/toolkit-for-ynab/releases","browserActionTitle":"Toolkit for YNAB","betaDisplayName":"Toolkit for YNAB (Beta)","developmentDisplayName":"Toolkit for YNAB (Development)","subtitle":"Unofficial Safari companion for YNAB","legalDisclaimer":"Unofficial app. Not affiliated with YNAB or its parent company.","supportedDomains":["https://app.ynab.com/*"]}');
 
 /***/ },
 

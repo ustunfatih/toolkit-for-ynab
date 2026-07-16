@@ -1369,7 +1369,7 @@ function HelpModal({ isOpen, setIsOpen, }) {
             react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null,
                 react__WEBPACK_IMPORTED_MODULE_1__.createElement("h2", null, "Who works on the Toolkit?"),
                 react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null,
-                    "OpenBudget for YNAB is an independent fork focused on Safari and Mac App Store readiness. Release notes and source code live on ",
+                    "Toolkit for YNAB is an independent fork focused on Safari and Mac App Store readiness. Release notes and source code live on ",
                     react__WEBPACK_IMPORTED_MODULE_1__.createElement(toolkit_components_links__WEBPACK_IMPORTED_MODULE_13__.GitHubLink, null, "GitHub"),
                     ".")),
             react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null,
@@ -1405,10 +1405,10 @@ function HelpModal({ isOpen, setIsOpen, }) {
             react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null,
                 react__WEBPACK_IMPORTED_MODULE_1__.createElement("h2", null, "What feature is next?"),
                 react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null,
-                    "The priority is Safari reliability, App Store compliance, and long-term compatibility with the current YNAB web app. Check the ",
-                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(toolkit_components_links__WEBPACK_IMPORTED_MODULE_13__.ReleaseNotesLink, null, "release notes"),
+                    "The priority is Safari reliability, App Store compliance, and long-term compatibility with the current YNAB web app. Check the",
                     ' ',
-                    "for the latest progress and roadmap items.")))));
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(toolkit_components_links__WEBPACK_IMPORTED_MODULE_13__.ReleaseNotesLink, null, "release notes"),
+                    " for the latest progress and roadmap items.")))));
 }
 function AlertBanner({ children, variant = 'danger', }) {
     const [isDismissed, setIsDismissed] = react__WEBPACK_IMPORTED_MODULE_1__.useState(false);
@@ -2134,7 +2134,7 @@ const settingsMap = {
         "type": "checkbox",
         "default": false,
         "section": "advanced",
-        "title": "Disable OpenBudget for YNAB",
+        "title": "Disable Toolkit for YNAB",
         "description": "Turn all features on and off with a single switch."
     },
     "BudgetProgressBars": {
@@ -19354,7 +19354,7 @@ const getCurrentOrigin = () => typeof window !== 'undefined' && window.location?
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"displayName":"OpenBudget for YNAB","extensionDisplayName":"OpenBudget for YNAB Extension","author":"Fatih Ustun","bundleIdPrefix":"com.fatihustun.openbudgetforynab","homepageUrl":"https://github.com/fatihustun/toolkit-for-ynab","supportUrl":"https://github.com/fatihustun/toolkit-for-ynab/issues","privacyUrl":"https://github.com/fatihustun/toolkit-for-ynab/blob/main/privacy-policy.md","releasesUrl":"https://github.com/fatihustun/toolkit-for-ynab/releases","browserActionTitle":"OpenBudget for YNAB","betaDisplayName":"OpenBudget for YNAB (Beta)","developmentDisplayName":"OpenBudget for YNAB (Development)","subtitle":"Unofficial Safari companion for YNAB","legalDisclaimer":"Unofficial app. Not affiliated with YNAB or its parent company.","supportedDomains":["https://app.youneedabudget.com/*","https://app.ynab.com/*"]}');
+module.exports = /*#__PURE__*/JSON.parse('{"displayName":"Toolkit for YNAB","extensionDisplayName":"Toolkit for YNAB Extension","author":"Fatih Ustun","bundleIdPrefix":"com.ustunfatih.toolkitforynab","hostBundleIdentifier":"com.ustunfatih.toolkitforynab","extensionBundleIdentifier":"com.ustunfatih.toolkitforynab.Extension","homepageUrl":"https://github.com/ustunfatih/toolkit-for-ynab","supportUrl":"https://github.com/ustunfatih/toolkit-for-ynab/issues","privacyUrl":"https://github.com/ustunfatih/toolkit-for-ynab/blob/develop/privacy-policy.md","releasesUrl":"https://github.com/ustunfatih/toolkit-for-ynab/releases","browserActionTitle":"Toolkit for YNAB","betaDisplayName":"Toolkit for YNAB (Beta)","developmentDisplayName":"Toolkit for YNAB (Development)","subtitle":"Unofficial Safari companion for YNAB","legalDisclaimer":"Unofficial app. Not affiliated with YNAB or its parent company.","supportedDomains":["https://app.ynab.com/*"]}');
 
 /***/ }),
 /* 76 */

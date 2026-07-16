@@ -22,6 +22,10 @@ save-commands.json
 package-lock.json
 yarn-error.log
 
+# Xcode per-user workspace state
+**/xcuserdata/
+*.xcuserstate
+
 # build directory
 dist/
 outDir/
@@ -32,4 +36,3 @@ scripts/settings.json
 
 # created at build time with tasks/generateFeatureIndex.js
 src/extension/features/index.ts
-

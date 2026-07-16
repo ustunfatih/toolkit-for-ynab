@@ -1,8 +1,8 @@
 {
-  "name": "OpenBudget for YNAB (Development)",
+  "name": "Toolkit for YNAB (Development)",
   "action": {
     "default_icon": "assets/images/icons/button.png",
-    "default_title": "OpenBudget for YNAB (Development)",
+    "default_title": "Toolkit for YNAB (Development)",
     "default_popup": "popup/index.html"
   }
 }

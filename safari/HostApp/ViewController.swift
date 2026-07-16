@@ -4,18 +4,18 @@ import SafariServices
 class ViewController: NSViewController {
     private var extensionBundleIdentifier: String {
         guard let hostBundleIdentifier = Bundle.main.bundleIdentifier else {
-            return "com.fatihustun.openbudgetforynab.OpenBudget-for-YNAB.Extension"
+            return "com.ustunfatih.toolkitforynab.Extension"
         }
 
         return "\(hostBundleIdentifier).Extension"
     }
 
     private var appName: String {
-        Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String ?? "OpenBudget for YNAB"
+        Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String ?? "Toolkit for YNAB"
     }
 
-    private let supportURL = URL(string: "https://github.com/fatihustun/toolkit-for-ynab/issues")!
-    private let privacyURL = URL(string: "https://github.com/fatihustun/toolkit-for-ynab/blob/main/privacy-policy.md")!
+    private let supportURL = URL(string: "https://github.com/ustunfatih/toolkit-for-ynab/issues")!
+    private let privacyURL = URL(string: "https://github.com/ustunfatih/toolkit-for-ynab/blob/develop/privacy-policy.md")!
     private let statusBadge = NSTextField(labelWithString: "Checking Safari extension…")
     private let headlineLabel = NSTextField(labelWithString: "")
     private let detailLabel = NSTextField(wrappingLabelWithString: "")
@@ -173,7 +173,7 @@ class ViewController: NSViewController {
         Extension Bundle ID: \(extensionBundleIdentifier)
         Host Bundle ID: \(Bundle.main.bundleIdentifier ?? "Unavailable")
         Safari State: \(enabledText)
-        Supported Domains: app.ynab.com, app.youneedabudget.com
+        Supported Domain: app.ynab.com
         """
     }
 
